@@ -36,7 +36,7 @@ const InputMessage = ({ input, setInput, sendMessage, loading }) => {
     setQuestionError(null)
 
     try {
-      const res = await axios.get('https://fastapi-8yb5.onrender.com/question');
+      const res = await axios.get('http://localhost:8000/question');
       if (!res.data) {
         throw new Error('No question was found in the response.')
       }
@@ -144,7 +144,7 @@ const useMessages = () => {
 
     const last10messages = newMessage.slice(-10);
     try {
-      const response = await axios.post('https://fastapi-8yb5.onrender.com/chat/',
+      const response = await axios.post('http://localhost:8000/chat/',
         {
           msg_text: last10messages
         },
@@ -222,7 +222,7 @@ export default function Chat() {
   const getChart = async () => {
     try {
       const res = await axios.post(
-        'https://fastapi-8yb5.onrender.com/charts/createChart',
+        'http://localhost:8000/charts/createChart',
         {},
         {
           headers: {
@@ -232,7 +232,7 @@ export default function Chat() {
       );
 
       if (res.status === 200) {
-        const response = await axios.get('https://fastapi-8yb5.onrender.com/charts/getChart', {
+        const response = await axios.get('http://localhost:8000/charts/getChart', {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
@@ -288,7 +288,7 @@ export default function Chat() {
 
   async function checkBirthday() {
     try {
-      const response = await axios.get('https://fastapi-8yb5.onrender.com/birthday_information/birthday', {
+      const response = await axios.get('http://localhost:8000/birthday_information/birthday', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },

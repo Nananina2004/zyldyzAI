@@ -34,7 +34,7 @@ const Page = () => {
             password: password,
           };
           
-          const response = await axios.post('https://fastapi-8yb5.onrender.com/auth/users', userData);
+          const response = await axios.post('http://localhost:8000/auth/users', userData);
       
           console.log('User registered successfully:', response.data);
           console.log(response.status)

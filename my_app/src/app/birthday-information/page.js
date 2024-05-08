@@ -25,7 +25,7 @@ const BirthdayForm = () => {
 
   async function checkBirthday() {
     try {
-      const response = await axios.get('https://fastapi-8yb5.onrender.com/birthday_information/birthday', {
+      const response = await axios.get('http://localhost:8000/birthday_information/birthday', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
@@ -57,13 +57,13 @@ const BirthdayForm = () => {
       let response;
 
       if (!bb) {
-        response = await axios.post('https://fastapi-8yb5.onrender.com/birthday_information', userData, {
+        response = await axios.post('http://localhost:8000/birthday_information', userData, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         });
       } else {
-        response = await axios.patch('https://fastapi-8yb5.onrender.com/birthday_information/birthday', userData, {
+        response = await axios.patch('http://localhost:8000/birthday_information/birthday', userData, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
