@@ -18,19 +18,19 @@ cd "$(dirname "$0")" || exit
 case "$1" in
     build)
         echo "Building the Docker containers..."
-        docker-compose build
+        docker compose build
         ;;
     up)
         echo "Starting the Docker containers..."
-        docker-compose up -d
+        docker compose up -d
         ;;
     down)
         echo "Stopping and removing the Docker containers..."
-        docker-compose down
+        docker compose down
         ;;
     logs)
         echo "Fetching logs from the Docker containers..."
-        docker-compose logs -f app
+        docker compose logs -f app
         ;;
     *)
         usage

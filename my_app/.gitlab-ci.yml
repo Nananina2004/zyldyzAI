@@ -1,13 +1,32 @@
 stages:
   - build
+  - deploy
 
 build:
-  image: my_app_web:latest
   stage: build
+  image: docker:latest
+  services:
+    - docker:dind
   script:
-    - ./docker_manage.sh build
-    - ./docker_manage.sh up 
+    - docker build -t my_app_web:latest .
+    - docker save -o my_app_web.tar my_app_web:latest
   artifacts:
     paths:
-      - build/ 
+      - my_app_web.tar
+
+deploy:
+  stage: deploy
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker load -i my_app_web.tar
+    - docker tag my_app_web:latest registry.example.com/my_app_web:latest
+    - docker push registry.example.com/my_app_web:latest
+    - ./deploy_to_production.sh
+  environment:
+    name: production
+    url: https://example.com
+  only:
+    - master
 
