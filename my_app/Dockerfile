@@ -1,12 +1,13 @@
-FROM node:16.9.0-alpine AS build
+FROM node:18-alpine
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
+COPY package*.json ./
 
-RUN npm install -g npm@10.6.0
-RUN npm install --legacy-peer-deps
+RUN npm install --legacy-peer-deps --fetch-retry-maxtimeout=120000 --fetch-retry-mintimeout=5000
+
 COPY . .
 
-RUN npm run build
+CMD ["npm", "run", "dev"]
 
+EXPOSE 3000
